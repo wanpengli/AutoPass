@@ -1,0 +1,64 @@
+<h2>Create your AutoPass Account</h2>
+<script type="text/javascript" src="/static/js/AES/core.js"></script>
+<script type="text/javascript" src="/static/js/AES/md5.js"></script>
+<script type="text/javascript" src="/static/js/AES/enc-base64.js"></script>
+<script type="text/javascript" src="/static/js/AES/evpkdf.js"></script>
+<script type="text/javascript" src="/static/js/AES/cipher-core.js"></script>
+<script type="text/javascript" src="/static/js/AES/aes.js"></script>
+<script type="text/javascript" src="/static/js/registration.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<form id="registration" method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>Account name:</td>
+      <td><input id="account_name" type="text" name="username" ></td>
+      <td><button type="button" onclick="check_account()">Check account availability</button></td>
+      <td> <p id="availability" hidden>The username is available.</p></td>
+    </tr>
+    <tr>
+      <td>First name:</td>
+      <td><input type="text" name="first_name" id="first_name" ></td>
+      <td><p id="first_name_ava" hidden>First Name is empty.</p></td>
+    </tr>
+    <tr>
+      <td>Last name:</td>
+      <td><input type="text" name="last_name" id="last_name"></td>
+      <td><p id="last_name_ava" hidden>Last Name is empty.</p></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" id="user_email" name="email" placeholder="me@example.com"></td>
+      <td><p id="email_ava" hidden>The email is invalid!</p></td>
+    </tr>
+    <tr>
+      <td>Password: </td>
+      <td><input id="f_pwd" type="password" name="password"></td>
+    </tr>
+    <tr>
+      <td>Password confirmation:</td>
+      <td> <input id="s_pwd" type="password" name="_password"></td>
+      <td><p id="pwd_not_same" hidden style="color: red">Password is not the same!</p></td>
+    </tr>
+    <tr>
+      <td>Master Password:</td>
+      <td><input id="m_pwd" type="text"></td>
+      <td> <button type="button" onclick="gen_master_key()">Generate Master Key</button>
+      </td>
+    </tr>
+    <tr>
+      <td><input id="enc_master_pwd" type="text" name="enc_master_pwd" hidden></td>
+      <td><input id="hash_master_pwd" type="text" name="hash_master_pwd" hidden></td>
+    </tr>
+  <table>
+  <div><p id="m_pwd_ava" hidden>The master password should be 16 characters, including at least 1 digit, 1 special character and 1 alphabet.</p></div>
+  <div class="g-recaptcha" data-sitekey="6LfbYJQUAAAAAN6GGKptDhy7pzc9zXyeCtVBHK-S"></div>
+  <div><button type="button" onclick="register()">Registration</button>
+    </div>
+
+  </form>
+  <p>Please keep a hard copy this master key, cause AutoPass is not able to recover this key if you forget your AutoPass login password.</p>
+  <br>
+  <button type="button" onclick="printMasterKey()">Print Registration</button>
+
+

@@ -1,0 +1,25 @@
+<p>Manage accounts with AutoPass.</p>
+<table>
+  <tr>
+    <th>URL</th>
+    <th>User accounts</th>
+    <th>Action</th>
+  </tr>
+
+  {% for domain, accounts in user_accounts.items %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <form action="/delete">
+      <td><input type="text" hidden name="domain" value="{{domain}}">{{ domain }}</td>
+      <td>
+        <select name="account_name" id="selection_{{ domain }}" size ="4">
+        {% for account in accounts %}
+          <option value="{{ account.0 }}">{{account.0}}</option>
+        {% endfor %}
+         </select>
+      </td>
+      <td><button type="submit" id="button_{{domain}}">Delete selected account</button></td>
+    </form>
+    </tr>
+{% endfor %}
+</table>
+<script type="text/javascript" src="/static/js/manage.js"></script>

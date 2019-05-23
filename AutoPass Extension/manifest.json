@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "name": "AutoPass",
+  "version": "0.0.2",
+  "description": "An Automatic Password Generator",
+  "browser_action": {
+    "default_title": "AutoPass",
+    "default_icon": {
+      "128": "images/green.png"
+    },
+    "default_popup": "contents/popup.html"
+  },
+  "icons": {
+    "128": "images/green.png"
+  },
+  "background": {
+    "scripts": [
+
+      "scripts/AES/core.js",
+      "scripts/AES/md5.js",
+      "scripts/AES/enc-base64.js",
+      "scripts/AES/evpkdf.js",
+      "scripts/AES/cipher-core.js",
+      "scripts/AES/aes.js",
+      "scripts/Biginteger.min.js",
+      "scripts/utils.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [{
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_matches":[
+        "https://www.autopasspg.co.uk/*",
+        "http://www.autopasspg.co.uk/*"
+      ],
+      "js": [
+          "scripts/pagecontent.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+  }],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "clipboardWrite"
+  ]
+}

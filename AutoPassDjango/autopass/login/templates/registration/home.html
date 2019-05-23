@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+    <p>Welcome {{ user.username }}. This is your AutoPass Home page.</p>
+    <table>
+      <tr>
+        <td>First Name : </td>
+        <td>{{user.first_name}}</td>
+      </tr>
+      <tr>
+        <td>Last Name: </td>
+        <td>{{user.last_name}}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td> {{user.email}}</td>
+      </tr>
+    </table>
+    <p><a href="/manage">Manage Accounts</a></p>
+    <p><a href="/logout">Logout</a></p>
+{% endif %}
